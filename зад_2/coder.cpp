@@ -58,6 +58,9 @@ coder::coder(std::string ws_key)
 string coder::encrypt(std::string open_text) // шифрование
 {
     string tabl = getValidOpenText(open_text);
+    if (tabl.length() <= key1){
+    	throw cipher_error(std::string("Key > length stroka"));
+    }
     string tr = tabl;
     int len, nstrok, index, x;
     len = tabl.length(); // введенный текст
@@ -78,6 +81,9 @@ string coder::encrypt(std::string open_text) // шифрование
 string coder::decrypt(const std::string& cipher_text) // расшифрование
 {
     string tabl = getValidCipherText(cipher_text);
+    if (tabl.length() <= key1){
+    	throw cipher_error(std::string("Key > length stroka"));
+    }
     int len, nstrok, index, x;
     len = tabl.length();
     nstrok = (len - 1) / key1 + 1; // количество столбцов

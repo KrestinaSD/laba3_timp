@@ -77,8 +77,14 @@ SUITE(EncryptTest)
     	std::string encrypted_text = c.encrypt(open_text);
     	CHECK_EQUAL(expected_encrypted_text, encrypted_text);
     }   
+    TEST(WithBadKey) {
+    	std::string validKey = "6";
+    	coder c(validKey);
+    	std::string open_text = "HELLO";  
+    	CHECK_THROW(c.encrypt(open_text), cipher_error);
+    } 
 }
-\
+
 SUITE(DecryptText)
 {
     TEST(ValidTEXTeng) {
@@ -121,6 +127,12 @@ SUITE(DecryptText)
     	coder c(validKey);
     	std::string cipher_text = "HELLO!!!";
     	CHECK_THROW(c.decrypt(cipher_text), cipher_error);
+    }
+    TEST(WithBadKey) {
+    	std::string validKey = "6";
+    	coder c(validKey);
+    	std::string open_text = "HELLO";  
+    	CHECK_THROW(c.decrypt(open_text), cipher_error);
     }
 }
 

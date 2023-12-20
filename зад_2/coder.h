@@ -16,10 +16,12 @@ public:
     coder(std::string ws_key);
     std::string encrypt(std::string open_text); // зашифрование
     std::string decrypt(const std::string& cipher_text); // расшифрование
+    #if _UNITTEST_ != 1
     int getKey() const { //создан для модульных тестов
         return key1;
     }
-     int getValidKey(std::string ws_key);
+    #endif
+    int getValidKey(std::string ws_key);
     std::string getValidOpenText(std::string  ws_open_text);
     std::string getValidCipherText(const std::string & ws_cipher_text);
 };
